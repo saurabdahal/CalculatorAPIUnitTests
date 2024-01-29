@@ -28,5 +28,21 @@ namespace CalculatorAPI.Controllers
         {
             return num1 * num2;
         }
+
+        [Route("/divide/{smallnumber}/{bignumber}")]
+        [HttpGet]
+        public float Divide(float smallnumber, float bignumber)
+        {
+            if (bignumber < smallnumber) { return 0f; }
+            return bignumber / smallnumber;
+        }
+
+        [Route("/modulo/{smallnumber}/{bignumber}")]
+        [HttpGet]
+        public float Modulo(float smallnumber, float bignumber)
+        {
+            if (bignumber < smallnumber) { return 0f; }
+            return bignumber % smallnumber;
+        }
     }
 }
