@@ -21,5 +21,12 @@ namespace CalculatorAPI.Controllers
             if (bignumber < smallnumber) { return 0.0f; }
             return bignumber - smallnumber;
         }
+
+        [Route("/multiply/{num1}/{num2}")]
+        [HttpGet]
+        public float Multiply(float num1, float num2)
+        {
+            return num1 * num2;
+        }
     }
 }
