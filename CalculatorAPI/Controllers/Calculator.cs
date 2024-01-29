@@ -13,5 +13,13 @@ namespace CalculatorAPI.Controllers
 
             return num1 + num2;
         }
+
+        [Route("/subtract/{smallnumber}/{bignumber}")]
+        [HttpGet]
+        public float Subtract(float smallnumber, float bignumber)
+        {
+            if (bignumber < smallnumber) { return 0.0f; }
+            return bignumber - smallnumber;
+        }
     }
 }
