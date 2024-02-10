@@ -8,7 +8,7 @@ namespace CalculatorAPI.Controllers
     {
         [Route("/add/{num1}/{num2}")]
         [HttpGet]
-        public float Add(float num1, float num2)
+        public decimal Add(decimal num1, decimal num2)
         {
 
             return num1 + num2;
@@ -16,32 +16,32 @@ namespace CalculatorAPI.Controllers
 
         [Route("/subtract/{smallnumber}/{bignumber}")]
         [HttpGet]
-        public float Subtract(float smallnumber, float bignumber)
+        public decimal Subtract(decimal smallnumber, decimal bignumber)
         {
-            if (bignumber < smallnumber) { return 0.0f; }
+            if (bignumber < smallnumber) { return 0.0m; }
             return bignumber - smallnumber;
         }
 
         [Route("/multiply/{num1}/{num2}")]
         [HttpGet]
-        public float Multiply(float num1, float num2)
+        public decimal Multiply(decimal num1, decimal num2)
         {
             return num1 * num2;
         }
 
         [Route("/divide/{smallnumber}/{bignumber}")]
         [HttpGet]
-        public float Divide(float smallnumber, float bignumber)
+        public decimal Divide(decimal smallnumber, decimal bignumber)
         {
-            if (bignumber < smallnumber) { return 0f; }
+            if (bignumber < smallnumber) { return 0m; }
             return bignumber / smallnumber;
         }
 
         [Route("/modulo/{smallnumber}/{bignumber}")]
         [HttpGet]
-        public float Modulo(float smallnumber, float bignumber)
+        public decimal Modulo(decimal smallnumber, decimal bignumber)
         {
-            if (bignumber < smallnumber) { return 0f; }
+            if (bignumber < smallnumber) { return 0m; }
             return bignumber % smallnumber;
         }
     }
