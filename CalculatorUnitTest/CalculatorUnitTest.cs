@@ -113,7 +113,74 @@ namespace CalculatorUnitTest
         }
 
 
+        /* from here we start the unit tests for the Multiply method */
 
+        [TestMethod]
+        public void Multiply_WhenBothNumbersArePositive_ShouldReturnCorrectPositiveResult()
+        {
+            decimal num1 = 2m;
+            decimal num2 = 3m;
+
+            decimal result = calculator.Multiply(num1, num2);
+
+            // Assert result is positive with 2 * 3 = 6
+            Assert.AreEqual(6m, result);
+            Assert.IsTrue(result > 0, $"Expected a positive value, but got {result}");
+        }
+
+        [TestMethod]
+        public void Multiply_WhenBothNumbersAreNegative_ShouldReturnCorrectPositiveResult()
+        {
+            decimal num1 = -2m;
+            decimal num2 = -3m;
+
+            decimal result = calculator.Multiply(num1, num2);
+
+            // Assert result is positive with -2 * -3 = 6
+            Assert.AreEqual(6m, result);
+            Assert.IsTrue(result > 0, $"Expected a positive value, but got {result}");
+        }
+
+        [TestMethod]
+        public void Multiply_WhenOneNumberIsZero_ShouldReturnZero()
+        {
+            // Arrange
+            decimal num1 = 0m;
+            decimal num2 = 5.5m;
+
+            // Act
+            decimal result1 = calculator.Multiply(num1, num2);
+
+            // Assert result is zero with 0 * 5.5 = 0
+            Assert.AreEqual(0m, result1);
+        }
+
+        [TestMethod]
+        public void Multiply_WhenOneNumberIsPositiveAndOneIsNegative_ShouldReturnNegativeResult()
+        {
+            decimal num1 = 2m;
+            decimal num2 = -3m;
+
+            decimal result = calculator.Multiply(num1, num2);
+
+            // Assert result is negative with 2 * (-3) = -6
+            Assert.AreEqual(-6m, result);
+            Assert.IsTrue(result < 0);
+        }
+
+        [TestMethod]
+        public void Multiply_WhenNumbersAreLarge_ShouldReturnCorrectResult()
+        {
+            // Arrange
+            decimal num1 = 1000000000000000000.5m;
+            decimal num2 = 2m;
+
+            // Act
+            decimal result = calculator.Multiply(num1, num2);
+
+            // Assert result is positive with 1000000000000001m
+            Assert.AreEqual(2000000000000000001m, result);
+        }
 
     }
 }
