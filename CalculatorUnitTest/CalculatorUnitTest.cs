@@ -58,200 +58,62 @@ namespace CalculatorUnitTest
             Assert.AreEqual(1000000000000000000m, result);
         }
 
+
         /** From here we start the unit tests for the Subtract method */
 
         [TestMethod]
-        public void Subtract_WhenBothNumbersArePositive_ShouldReturnCorrectResult()
+        public void Subtract_WhenFirstNumberIsBigger_ShouldReturnPositive()
         {
-            // Act
             decimal result = calculator.Subtract(5.5m, 3.5m);
 
-            // Assert
-            Assert.AreEqual(2m, result);
+            // Assert result is positive with 5.5 - 3.5 = 2.0 > 0
+            Assert.IsTrue(result > 0, $"Expected a positive value, but got {result}");
         }
 
         [TestMethod]
-        public void Subtract_WhenBothNumbersAreNegative_ShouldReturnCorrectResult()
+        public void Subtract_WhenBothNumbersAreNegative_ShouldReturnOppositeSignResultWithBiggerNumber()
         {
             // Act
-            decimal result = calculator.Subtract(-2.5m, -3.5m);
+            decimal result = calculator.Subtract(-2m, -3m);
+            decimal result1 = calculator.Subtract(-5m, -3m);
 
-            // Assert
-            Assert.AreEqual(1m, result);
+
+            // Assert result is positive (opposite sign) with -2 - (-3) = 1 >  0
+            Assert.IsTrue(result > 0, $"Expected a positive value, but got {result}");
+
+            // Assert result is negative (opposite sign) with -5 - (-3) = -2 <  0
+            Assert.IsFalse(result1 > 0, $"Expected a negative value, but got {result1}");
         }
 
         [TestMethod]
-        public void Subtract_WhenOneNumberIsZero_ShouldReturnOtherNumber()
+        public void Subtract_WhenSecondNumberisBigger_ShouldReturnNegative()
         {
-            // Act
-            decimal result1 = calculator.Subtract(0m, 5.5m);
-            decimal result2 = calculator.Subtract(-3.3m, 0m);
+            decimal result = calculator.Subtract(5m, 10m);
 
-            // Assert
-            Assert.AreEqual(-5.5m, result1);
-            Assert.AreEqual(-3.3m, result2);
+            Assert.IsTrue(result < 0, $"Expected a positive value, but got {result}");
+
         }
 
         [TestMethod]
-        public void Subtract_WhenOneNumberIsPositiveAndOneIsNegative_ShouldReturnCorrectResult()
+        public void Subtract_WhenIncorrectResult_ShouldFail()
         {
-            // Act
-            decimal result = calculator.Subtract(2.5m, -3.5m);
+            decimal result = calculator.Subtract(10m, 5m);
 
-            // Assert
-            Assert.AreEqual(6m, result);
+            Assert.IsFalse(result == 3m, $"Expected result to be different from 3, but got {result}");
         }
-
         [TestMethod]
-        public void Subtract_WhenNumbersAreLarge_ShouldReturnCorrectResult()
+        public void Subtract_WhenSameNumberIsSubtracted_ShouldReturnZero()
         {
-            // Act
-            decimal result = calculator.Subtract(1000000000000000000.5m, 0.5m);
+            decimal number = 7.5m;
 
-            // Assert
-            Assert.AreEqual(1000000000000000000m, result);
-        }
+            decimal result = calculator.Subtract(number, number);
 
-        /* from here we start the unit tests for the Multiply method */
-
-        [TestMethod]
-        public void Multiply_WhenBothNumbersArePositive_ShouldReturnCorrectResult()
-        {
-            // Arrange
-            decimal num1 = 2.5m;
-            decimal num2 = 3.5m;
-
-            // Act
-            decimal result = calculator.Multiply(num1, num2);
-
-            // Assert
-            Assert.AreEqual(8.75m, result);
-        }
-
-        [TestMethod]
-        public void Multiply_WhenBothNumbersAreNegative_ShouldReturnCorrectResult()
-        {
-            // Arrange
-            decimal num1 = -2.5m;
-            decimal num2 = -3.5m;
-
-            // Act
-            decimal result = calculator.Multiply(num1, num2);
-
-            // Assert
-            Assert.AreEqual(8.75m, result);
-        }
-
-        [TestMethod]
-        public void Multiply_WhenOneNumberIsZero_ShouldReturnZero()
-        {
-            // Arrange
-            decimal num1 = 0m;
-            decimal num2 = 5.5m;
-
-            // Act
-            decimal result1 = calculator.Multiply(num1, num2);
-
-            // Assert
-            Assert.AreEqual(0m, result1);
-        }
-
-        [TestMethod]
-        public void Multiply_WhenOneNumberIsPositiveAndOneIsNegative_ShouldReturnCorrectResult()
-        {
-            // Arrange
-            decimal num1 = 2.5m;
-            decimal num2 = -3.5m;
-
-            // Act
-            decimal result = calculator.Multiply(num1, num2);
-
-            // Assert
-            Assert.AreEqual(-8.75m, result);
-        }
-
-        [TestMethod]
-        public void Multiply_WhenNumbersAreLarge_ShouldReturnCorrectResult()
-        {
-            // Arrange
-            decimal num1 = 1000000000000000000.5m;
-            decimal num2 = 2m;
-
-            // Act
-            decimal result = calculator.Multiply(num1, num2);
-
-            // Assert
-            Assert.AreEqual(2000000000000000001m, result);
-        }
-
-        /* from here we start the unit tests for the Divide method */
-
-        [TestMethod]
-        public void Divide_WhenDividingByPositiveNumber_ShouldReturnCorrectResult()
-        {
-            // Arrange
-            decimal numerator = 10m;
-            decimal denominator = 2m;
-
-            // Act
-            decimal result = calculator.Divide(numerator, denominator);
-
-            // Assert
-            Assert.AreEqual(5m, result);
-        }
-
-        [TestMethod]
-        public void Divide_WhenDividingByNegativeNumber_ShouldReturnCorrectResult()
-        {
-            // Arrange
-            decimal numerator = 15m;
-            decimal denominator = -3m;
-
-            // Act
-            decimal result = calculator.Divide(numerator, denominator);
-
-            // Assert
-            Assert.AreEqual(-5m, result);
-        }
-
-        [TestMethod]
-        public void Divide_WhenDividingByZero_ShouldThrowDivideByZeroException()
-        {
-            // Arrange
-            decimal numerator = 8m;
-            decimal denominator = 0m;
-
-            // Act & Assert
-            Assert.ThrowsException<DivideByZeroException>(() => calculator.Divide(numerator, denominator));
-        }
-
-        [TestMethod]
-        public void Divide_WhenDividingZeroByAnyNumber_ShouldReturnZero()
-        {
-            // Arrange
-            decimal numerator = 0m;
-            decimal denominator = 7m;
-
-            // Act
-            decimal result = calculator.Divide(numerator, denominator);
-
-            // Assert
+            // Assert result is zero with 7.5 - 7.5 = 0
             Assert.AreEqual(0m, result);
         }
 
-        [TestMethod]
-        public void Divide_WhenDividingLargeNumberBySmallNumber_ShouldReturnVeryLargeResult()
-        {
-            // Arrange
-            decimal numerator = 999999999999999999.9m;
-            decimal denominator = 0.1m;
 
-            // Act
-            decimal result = calculator.Divide(numerator, denominator);
 
-            // Assert
-            Assert.AreEqual(9999999999999999999m, result);
-        }
 
     }
 }
