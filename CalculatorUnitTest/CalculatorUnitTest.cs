@@ -182,5 +182,74 @@ namespace CalculatorUnitTest
             Assert.AreEqual(2000000000000000001m, result);
         }
 
+
+
+
+
+
+
+
+
+
+        /* from here we start the unit tests for the Divide method */
+
+        [TestMethod]
+        public void Divide_WhenDividingByPositiveNumber_ShouldReturnCorrectPositiveResult()
+        {
+            decimal numerator = 10m;
+            decimal denominator = 2m;
+
+            decimal result = calculator.Divide(denominator, numerator);
+
+            // Assert result is positive with 10 / 2 = 5 > 0
+            Assert.AreEqual(5m, result);
+            Assert.IsTrue(result > 0);
+        }
+
+        [TestMethod]
+        public void Divide_WhenDividingByNegativeNumber_ShouldReturnCorrectNegativeResult()
+        {
+            decimal numerator = 15m;
+            decimal denominator = -3m;
+
+            decimal result = calculator.Divide(denominator, numerator);
+
+            // Assert result is negative with 15 / (-3) = -5 < 0
+            Assert.AreEqual(-5m, result);
+            Assert.IsTrue(result < 0);
+        }
+
+        [TestMethod]
+        public void Divide_WhenDividingByZero_ShouldThrowDivideByZeroException()
+        {
+            decimal numerator = 8m;
+            decimal denominator = 0m;
+
+            Assert.ThrowsException<DivideByZeroException>(() => calculator.Divide(denominator, numerator));
+        }
+
+        [TestMethod]
+        public void Divide_WhenDividingZeroByAnyNumber_ShouldReturnZero()
+        {
+            decimal numerator = 0m;
+            decimal denominator = 7m;
+
+            decimal result = calculator.Divide(denominator, numerator);
+
+            // Assert result is Zero with 0 / 7 = 0
+            Assert.AreEqual(0m, result);
+        }
+
+        [TestMethod]
+        public void Divide_WhenDividingLargeNumberBySmallNumber_ShouldReturnVeryLargeResult()
+        {
+            decimal numerator = 999999999999999999.9m;
+            decimal denominator = 0.1m;
+
+            decimal result = calculator.Divide(denominator, numerator);
+
+            Assert.AreEqual(9999999999999999999m, result);
+        }
+
     }
 }
